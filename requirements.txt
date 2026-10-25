@@ -1,0 +1,7 @@
+# Core has zero required dependencies (stdlib only) so the kit runs anywhere.
+# Optional integrations — install only what you use:
+#   pip install -e ".[mlflow]"      # MLflow tracing + evaluation logging
+#   pip install -e ".[langgraph]"   # LangGraph agent graph path
+#   pip install -e ".[databricks]"  # Databricks SDK for UC / Vector Search executors
+# Dev:
+#   pip install -e ".[dev]"         # pytest + ruff
