@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "databricks-agent-kit"
+version = "0.1.0"
+description = "A runnable starter kit for building production-grade agents on Databricks: UC-style tools, Model Serving client, RAG, and MLflow-style evals — all testable offline."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Ashish Arun"}]
+keywords = ["databricks", "ai-agents", "mlflow", "rag", "unity-catalog", "llm-evals"]
+dependencies = []
+
+[project.optional-dependencies]
+databricks = ["databricks-sdk"]
+mlflow = ["mlflow>=3"]
+langgraph = ["langgraph"]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+agent-kit-demo = "agent_kit.agent:demo_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unused_ignores = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
