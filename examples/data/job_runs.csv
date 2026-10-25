@@ -1,0 +1,7 @@
+job_name,status,duration_min,owner_team
+daily-ingest,SUCCEEDED,24,team-data-platform
+feature-refresh,FAILED,7,team-ml
+billing-rollup,SUCCEEDED,12,team-data-platform
+model-retrain,FAILED,31,team-ml
+quality-checks,SUCCEEDED,5,team-analytics
+nightly-export,TIMEOUT,90,team-analytics
