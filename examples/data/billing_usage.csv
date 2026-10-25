@@ -1,0 +1,7 @@
+date,service,sku,cost_usd
+2026-10-01,databricks,DBU-JOBS,412.50
+2026-10-01,databricks,DBU-SERVERLESS-SQL,188.20
+2026-10-02,databricks,DBU-JOBS,455.00
+2026-10-02,model-serving,FOUNDATION-MODEL-API,96.75
+2026-10-03,databricks,DBU-ALL-PURPOSE,230.40
+2026-10-03,vector-search,VS-INDEX,42.10
