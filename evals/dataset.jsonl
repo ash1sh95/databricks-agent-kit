@@ -1,0 +1,8 @@
+{"id": "billing-total", "question": "What is our total billing cost and spend this month?", "expected_tool": "query_billing", "expected_contains": ["$", "total spend"]}
+{"id": "billing-service-split", "question": "Show me the billing charges by service and cost.", "expected_tool": "query_billing", "expected_contains": ["databricks"]}
+{"id": "failed-jobs-list", "question": "Which jobs failed — list the failing job runs?", "expected_tool": "query_failed_jobs", "expected_contains": ["FAILED", "feature-refresh"]}
+{"id": "failed-jobs-count", "question": "How many pipeline failures — which jobs failed recently?", "expected_tool": "query_failed_jobs", "expected_contains": ["3 failed"]}
+{"id": "retention-policy", "question": "What does the documentation say about data retention policy?", "expected_tool": "search_docs", "expected_contains": ["90 days"]}
+{"id": "docs-cost-guideline", "question": "What does the documentation say about cost optimisation guidelines?", "expected_tool": "search_docs", "expected_contains": ["serverless"]}
+{"id": "unknown-question", "question": "What is the weather in Dallas today?", "expected_tool": null, "expected_contains": ["billing"]}
+{"id": "docs-agent-patterns", "question": "According to the documentation policy, how should agents call tools?", "expected_tool": "search_docs", "expected_contains": ["Unity Catalog"]}
