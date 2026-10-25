@@ -1,0 +1,75 @@
+# Databricks Asset Bundle skeleton for agent-kit.
+# Docs: https://docs.databricks.com/en/dev-tools/bundles/index.html
+# Deploy:  databricks bundle validate && databricks bundle deploy -t dev
+# Run:     databricks bundle run -t dev agent_kit_eval_job
+#
+# No hosts, tokens or workspace paths are committed here on purpose —
+# targets carry the workspace-specific values, supplied per environment.
+
+bundle:
+  name: databricks-agent-kit
+
+variables:
+  catalog:
+    description: Unity Catalog catalog for agent tables/results
+    default: main
+  schema:
+    description: Unity Catalog schema for agent tables/results
+    default: agent_kit
+  experiment:
+    description: MLflow experiment for eval runs
+    default: /Shared/agent-kit-evals
+
+resources:
+  jobs:
+    agent_kit_eval_job:
+      name: "[${bundle.target}] agent-kit eval"
+      tasks:
+        - task_key: run_evals
+          notebook_task:
+            notebook_path: ./01_agent_kit_on_databricks.py
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
+              experiment: ${var.experiment}
+              model_endpoint: ""
+              write_delta: "true"
+          job_cluster_key: job_cluster
+      job_clusters:
+        - job_cluster_key: job_cluster
+          new_cluster:
+            spark_version: "15.4.x-scala2.12"
+            node_type_id: "i3.xlarge"
+            num_workers: 0
+            single_user_name: "{{workspace.current_user.userName}}"
+            data_security_mode: "SINGLE_USER"
+      format: MULTI_TASK
+
+  # Optional: expose the agent as a Databricks App once the notebook path
+  # is proven. Apps are defined under resources.apps in current bundle
+  # schema versions — uncomment and adapt in your workspace, pointing
+  # source_code_path at a small app wrapper around agent_kit.Agent.
+  # apps:
+  #   agent_kit_app:
+  #     name: agent-kit
+  #     description: Workspace-insight agent UI
+  #     source_code_path: ../app
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      # host: https://<your-workspace-host>   # or set DATABRICKS_HOST
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: main
+      schema: agent_kit_dev
+
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: main
+      schema: agent_kit
