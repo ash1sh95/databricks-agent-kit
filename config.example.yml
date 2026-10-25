@@ -1,0 +1,9 @@
+# Example agent-kit config (YAML-lite: nested maps + scalars only).
+# Copy to config.yml and adjust; environment variables (AGENT_KIT_*) override it.
+agent_kit:
+  model_endpoint: mock
+  catalog: main
+  schema: agent_kit
+  experiment: /Shared/agent-kit-evals
+  max_steps: 6
+  temperature: 0.0
